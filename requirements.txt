@@ -1,0 +1,6 @@
+pyTelegramBotAPI
+requests
+fake-useragent
+bs4
+python-dotenv
+Flask
