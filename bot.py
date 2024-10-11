@@ -17,13 +17,21 @@ bot = telebot.TeleBot(TOKEN)
 user_links = {}
 user_chapters = {}
 
+headers = {
+    'User-Agent': UserAgent().random,
+    'Accept-Encoding': 'gzip, deflate',
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+    'Accept-Language': 'en-US,en;q=0.5',
+    'Connection': 'keep-alive',
+}
+
 def search_manga(query):
     url = f'https://komikindo.lol/?s={query}'
-    headers = {'User-Agent': UserAgent().random}
+    #headers = {'User-Agent': UserAgent().random}
     response = requests.get(url, headers=headers).text
     soup = bs(response, 'html.parser')
     find = soup.find_all('div', attrs={'class': 'animepost'})
-    print(soup.prettify())
+    #print(soup.prettify())
     manga_list = []
     for manga in find:
         thumbnail = manga.find('img')['src'] if manga.find('img') else 'No thumbnail'
@@ -42,7 +50,7 @@ def search_manga(query):
     return manga_list
 
 def get_chapters(link):
-    headers = {'User-Agent': UserAgent().random}
+    #headers = {'User-Agent': UserAgent().random}
     response = requests.get(link, headers=headers).text
     soup = bs(response, 'html.parser')
     chapter_list = soup.find('div', attrs={'class': 'bxcl scrolling', 'id': 'chapter_list'})
@@ -75,7 +83,7 @@ def create_chapter_keyboard(chapters, page=0):
     return markup
 
 def get_imgkomik(link):
-    headers = {'User-Agent': UserAgent().random}
+    #headers = {'User-Agent': UserAgent().random}
     response = requests.get(link, headers=headers).text
     soup = bs(response, 'html.parser')
     find_div = soup.find('div', attrs={'class': 'img-landmine'})
