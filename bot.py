@@ -31,7 +31,7 @@ def search_manga(query):
     response = requests.get(url, headers=headers).text
     soup = bs(response, 'html.parser')
     find = soup.find_all('div', attrs={'class': 'animepost'})
-    #print(soup.prettify())
+    print(soup.prettify())
     manga_list = []
     for manga in find:
         thumbnail = manga.find('img')['src'] if manga.find('img') else 'No thumbnail'
